@@ -25,12 +25,14 @@ public class JGraph extends PApplet{
 		
 		for(int i=0; i<50; i++){
 			
-			if(i<50){ // change to 90 to increase size
+			//if(i<50){ // change to 90 to increase size
+			if(i<50 && i%10 <=5){	
 				addEdge(i, i+10);
 			}
 		    
 		    
-		    if(i%10 !=5){
+		    //if(i%10 !=5){
+			if(i%10 !=5 && i%10 <=5){
 		    	addEdge(i,i+1);
 		    }
 		    
