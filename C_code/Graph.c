@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h> // for bool
@@ -5,11 +7,15 @@
 #include "Types.h"
 
 int i;
+int nbrs[10];
+int nbrsCount=0;
 
 Graph* createGraph(int size);
 AdjListNode* newListNode(AdjListNode *prev, int _id);
 Node* newNode(Node * src, int _id);
 bool addEdge(Graph *graph, int src, int dest);
+AdjListNode* getListNode(Graph *graph, int _id);
+int* getNeighbours(Graph *graph, int _id);
 
 Graph* createGraph(int size){
 	
@@ -75,6 +81,34 @@ bool addEdge(Graph *graph, int src, int dest){
 	
 	tmpNode->dest = newNode(tmpNode,dest);
 	return true;
+}
+
+int* getNeighbours(Graph *graph, int _id){
+	
+	
+	AdjListNode* adjListNode = getListNode(graph,_id);
+	Node* tmpNode = adjListNode->head;
+	nbrsCount=0;
+	
+	while(tmpNode->dest != NULL){
+		tmpNode = tmpNode->dest;
+		nbrs[nbrsCount] = tmpNode->_id;
+		nbrsCount++;	
+	}
+	return nbrs;
+}
+
+
+AdjListNode* getListNode(Graph *graph, int _id){
+	
+	int i =0 ;
+	AdjListNode *tmpListNode = graph->adjListHead;
+	 	
+	for(i=0; i<_id; i++){
+		tmpListNode = tmpListNode->next;
+	}
+	
+	return tmpListNode;
 }
 
 void printGraph(Graph *graph){
