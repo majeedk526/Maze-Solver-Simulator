@@ -19,3 +19,8 @@ int main(void){
 	system("PAUSE");
 	return EXIT_SUCCESS;	
 }
+
+
+void mCretaeGraph(){
+	
+}

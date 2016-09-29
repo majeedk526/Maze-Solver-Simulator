@@ -1,12 +1,10 @@
-#pragma once
-
 #include <stdio.h>
 #include "Types.h"
 #include "Stack.h"
 #include <stdbool.h>
 #include "Graph.c"
 
-int visited[100];
+int visited[100] = {-1};
 int numVisited = 0;
 
 bool isVisited(int _id);
@@ -19,7 +17,7 @@ int* dfsSearch(Graph *graph, int src, int dest){
 	bool searchOver = false;
 	int path[100];
 	
-	StackNode *stack = getStackPointer();
+	Stack *stack = getStackPointer();
 	int curId;
 	int j = 0;
 	int *cnbrs;
@@ -36,6 +34,7 @@ int* dfsSearch(Graph *graph, int src, int dest){
 		}
 		
 		visited[j] = curId;
+		j++;
 		
 		if(curId == dest){
 			pathFound = true;
@@ -45,7 +44,13 @@ int* dfsSearch(Graph *graph, int src, int dest){
 		
 		cnbrs = getNeighbours(graph,curId);
 		while(nbrsCount!=0){
-			push(stack, getListNode(graph, *cnbrs));
+			AdjListNode *adjNode = getListNode(graph, *cnbrs);
+			Node* nNode = adjNode->head;
+			if(nNode->_id == dest){
+				push(stack,nNode);
+				break;
+			} 
+			push(stack, adjNode->head);
 			cnbrs++;
 			nbrsCount--;	
 		}

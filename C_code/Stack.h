@@ -15,11 +15,11 @@ typedef struct Stacks{
 
 void push(Stack *stack, Node *n);
 Node* pop(Stack *stack);
-StackNode* getStackPointer();
+Stack* getStackPointer();
 
-StackNode* getStackPointer(){
-	StackNode *stack = (StackNode*) malloc(sizeof(StackNode));
-	stack->bottom = NULL;
+Stack* getStackPointer(){
+	Stack *stack = (Stack*) malloc(sizeof(Stack));
+	stack->stackHead = NULL;
 	return stack;
 }
 
