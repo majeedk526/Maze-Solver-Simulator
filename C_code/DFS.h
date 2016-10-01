@@ -15,7 +15,7 @@ int* dfsSearch(Graph *graph, int src, int dest){
 	
 	bool pathFound = false;
 	bool searchOver = false;
-	int path[100];
+	
 	
 	Stack *stack = getStackPointer();
 	int curId;
@@ -60,7 +60,9 @@ int* dfsSearch(Graph *graph, int src, int dest){
 		if(tmpNode == NULL){
 			searchOver = true;
 		}
-	}	
+	}
+	
+	return visited;	
 }
 
 void printPath(){

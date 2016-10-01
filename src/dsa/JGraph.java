@@ -8,9 +8,35 @@ public class JGraph extends PApplet{
 	private int refWidth = 150;
 	private int refHeight = 20;
 
+	int[] path;
+	
+	public native void jCreateGraph(int size);
+	public native void jAddEdge(int src, int dest);
+	public native void jDisplayGraph();
+	public native int[] jDfsSearch(int src, int dest);
+	
+	static {System.loadLibrary("GraphImpl");}
+	
 	public static void main(String[] args) {
 		PApplet.main(JGraph.class.getName());
-
+		
+		JGraph jgraph = new JGraph();
+		jgraph.jCreateGraph(10);
+		jgraph.addEdge(0, 1);
+		jgraph.addEdge(0, 3);
+		jgraph.addEdge(0, 5);
+		jgraph.addEdge(1, 3);
+		jgraph.addEdge(1, 7);
+		jgraph.addEdge(2, 9);
+		jgraph.addEdge(9, 1);
+		
+		//jgraph.jDisplayGraph();
+		int[] path = jgraph.jDfsSearch(0,1);
+		
+		for(int i=0; i<path.length; i++){
+			System.out.print(path[i] + "-> ");
+		}
+		System.out.println("\n");
 	}
 	
 	public void settings(){
@@ -69,7 +95,7 @@ public class JGraph extends PApplet{
 	  
 	  if(s-d==-10){
 	  // right edge
-	  Edge e = new Edge(this, refWidth + (column-1)*sConst, refHeight + (row-1)*sConst, sConst,2);
+	  //Edge e = new Edge(this, refWidth + (column-1)*sConst, refHeight + (row-1)*sConst, sConst,2);
 	  
 	  }
 	 
@@ -82,7 +108,7 @@ public class JGraph extends PApplet{
 	  
 	  if(s-d ==-1){
 	    // straight edge
-	    Edge e = new Edge(this, refWidth + (column-1)*sConst, refHeight + (row-1)*sConst, 2,sConst);
+	    //Edge e = new Edge(this, refWidth + (column-1)*sConst, refHeight + (row-1)*sConst, 2,sConst);
 	    
 	  }
 
