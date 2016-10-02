@@ -2,3 +2,4 @@
 /C_code/*.gch
 /C_code/*.exe
 compiler.txt
+*.log

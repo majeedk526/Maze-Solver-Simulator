@@ -2,38 +2,41 @@
 #include "Graph.c"
 #include <stdlib.h>
 #include "DFS.h"
+#include "dsa_JGraph.h"
 
 Graph *graph;
 
-int main(void){
-	
-	
-	/**addEdge(graph,0,2);
-	addEdge(graph,0,1);
-	addEdge(graph,1,2);
-	addEdge(graph,0,2);
-	addEdge(graph,2,0);	**/
-	//printGraph(graph);
-	
-	//dfsSearch(graph, 0,2);
-	
-	//system("PAUSE");
-	//return EXIT_SUCCESS;	
-}
+JNIEXPORT void JNICALL Java_dsa_JGraph_jCreateGraph
+  (JNIEnv *env, jobject o, jint size){
+  	
+  	graph = createGraph(size);
+  	return;
+  }
 
+JNIEXPORT void JNICALL Java_dsa_JGraph_jAddEdge
+  (JNIEnv *env, jobject o, jint src, jint dest){
+  	addEdge(graph,src, dest);
+  	return;
+  }
 
-void jCretaeGraph(){
-	graph = createGraph(3);
-}
+JNIEXPORT void JNICALL Java_dsa_JGraph_jDisplayGraph
+  (JNIEnv *env, jobject o){
+	printGraph(graph);
+	return;  	
+  }
+  
+  
+JNIEXPORT jintArray JNICALL Java_dsa_JGraph_jDfsSearch
+  (JNIEnv *env, jobject o, jint src, jint dest){
+  	int *path =  dfsSearch(graph, src,dest);
+  	int i=0;
+  	jint arr[10] = {-1};
+	for(i=0;i<10;i++){
+		arr[i] = path[i]; 	
+	} 
+  	
+  	jintArray p = (*env)->NewIntArray(env, 10);
+  	(*env)->SetIntArrayRegion(env, p,0,10,arr);
 
-void jAddEdge(int src, int dest){
-	addEdge(graph,src, dest);
-}
-
-void jDisplayGraph(){
-	
-}
-
-int* jDfsSearch(int src, int dest){
-	return dfsSearch(graph, 0,2);	
-}
+	  return p;
+  }
