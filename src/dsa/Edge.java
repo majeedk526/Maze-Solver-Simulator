@@ -31,7 +31,7 @@ public class Edge {
 	   }
 	   	
 	   vColor();
-	    p.rect(src.width-5, src.height-5, ht, wd);
+	    p.rect(src.width, src.height, ht, wd);
 	  }
 	  
 	  

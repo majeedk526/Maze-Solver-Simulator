@@ -17,14 +17,14 @@ public class Node {
 	    
 		this.p = p;
 	    this.x = x;
-	    this.y = y*10+x;
+	    this.y = y;
 	    
 	  }
 	  
 	  
 	  public void draw(){
 		  
-		 width = XOFFSET + dist*(y/10+1);
+		 width = XOFFSET + dist*((y*10+x)/10+1);
 		 height = YOFFSET + dist* (x+1);
 		 
 		  if(p.mouseX>=width-10 && p.mouseX<=width+10 && p.mouseY>=height-10 && p.mouseY<=height+10){

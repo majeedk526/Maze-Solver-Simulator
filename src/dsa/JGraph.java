@@ -76,13 +76,19 @@ public class JGraph extends PApplet{
 			}
 		}
 		
-		addEdge(0, 0, 0, 2);
-		//addEdge(0, 0, 1, 0);
+		addEdge(0, 0, 0, 1);
+		addEdge(0, 0, 1, 0);
+		addEdge(1, 0, 1, 1);
+		addEdge(1, 1, 2, 1);
+		addEdge(1, 1, 2, 1);
+		addEdge(2, 1, 3, 1);
+		addEdge(3, 1, 3, 2);
 		
 	}
 	
 	
 	public void draw(){
+		
 		for(int i=0; i<nodeList.size(); i++){
 			(nodeList.get(i)).draw();
 		}
