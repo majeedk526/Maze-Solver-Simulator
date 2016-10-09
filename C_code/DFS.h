@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include "Graph.c"
 
-int visited[100] = {-1};
+int visited[200] = {-1};
 int numVisited = 0;
 bool pathFound = false;
 
@@ -17,7 +17,12 @@ int* dfsSearch(Graph *graph, int src, int dest){
 	
 	bool searchOver = false;
 	
+	int trackBack[50];
+	int tbVisited = 0;
+	bool isBackTracking = false;
+	
 	Stack *stack = getStackPointer();
+	Stack *tbstack = getStackPointer();
 	int curId;
 	int *nbrIds;
 	
@@ -32,9 +37,36 @@ int* dfsSearch(Graph *graph, int src, int dest){
 		if(tmpNode==NULL){
 			searchOver = true;
 			continue;
+		} else {
+			//put on back track stack
+			if(!isVisited(tmpNode->_id)){
+				push(tbstack,tmpNode);	
+			}
 		}
 		
 		if(isVisited(tmpNode->_id)){
+			// throw first element of back track stack
+			// pop and add to visited (from tbstack) until unvisited neighbour node is found
+			isBackTracking = true;
+			pop(tbstack); // throw top node
+			while(isBackTracking){
+				Node *node = pop(tbstack);
+				if(node == NULL) {searchOver = true; break;}
+				visited[numVisited] = node->_id;
+				numVisited++;
+				nbrIds = getNeighbours(graph,node->_id);
+				while(nbrsCount!=0){
+					if(!isVisited(*nbrIds)){
+						push(tbstack,node);
+						isBackTracking = false;
+						break;
+					}
+					nbrIds++;
+					nbrsCount--;	
+				}
+				
+				if(!isBackTracking){break;}		
+			}
 			continue;
 		}
 		
@@ -46,20 +78,18 @@ int* dfsSearch(Graph *graph, int src, int dest){
 		}
 		
 		nbrIds = getNeighbours(graph,tmpNode->_id);
+		if(nbrsCount==1) {push(stack, tmpNode);}
 		while(nbrsCount!=0){
-			AdjListNode *adjNode = getListNode(graph, *nbrIds);
-			Node* nNode = adjNode->head;
-			if(nNode->_id == dest){
-				visited[numVisited] = nNode->_id;
+			if(*nbrIds == dest){
+				visited[numVisited] = *nbrIds;
 				numVisited++;
 				pathFound = true;
 				break; // break while loop
 			}
-			
-			if(!isVisited(nNode->_id)){
-				push(stack, nNode);
-			} 
-			
+			if(!isVisited(*nbrIds)){
+				AdjListNode *adjNode = getListNode(graph, *nbrIds);
+				push(stack, adjNode->head);
+			}
 			nbrIds++;
 			nbrsCount--;	
 		}

@@ -8,6 +8,7 @@ public class Edge {
 	Node src, dest; // source and destination node
 	PApplet p;
 	boolean visited = false;
+	int R=10;
 	
 	private final static int SIZE = 2; 
 	  
@@ -23,7 +24,7 @@ public class Edge {
 	  void draw(){
 		 
 		if(visited){
-			p.fill(p.color(0,150,200));
+			p.fill(p.color(R,150,200));
 		} else {
 			p.fill(p.color(100,0,0));	
 		}
@@ -57,6 +58,7 @@ public class Edge {
 	  
 	  void markVisited(){
 		  visited = true;
+		  R*=5;
 		  draw();
 	  }
 }

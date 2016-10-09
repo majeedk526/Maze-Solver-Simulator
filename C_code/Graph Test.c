@@ -8,16 +8,17 @@ Graph *graph;
 int main(void){
 	
 	graph = createGraph(10);
-	addEdge(graph,0,1);
-	addEdge(graph,0,3);
-	//addEdge(graph,0,5);
+	addEdge(graph,1,2);
 	addEdge(graph,1,3);
-	//addEdge(graph,1,7);
-	//addEdge(graph,2,9);
-	//addEdge(graph,9,1);
+	addEdge(graph,1,7);
+	addEdge(graph,7,9);
+	addEdge(graph,3,4);
+	addEdge(graph,4,5);
+	addEdge(graph,5,3);
+	addEdge(graph,2,6);
 	printGraph(graph);
 	
-	int *ids = dfsSearch(graph, 0,2);
+	int *ids = dfsSearch(graph, 1,10);
 	int i=0;
 	
 	for(i=0; i< numVisited; i++){
