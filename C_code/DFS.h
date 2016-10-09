@@ -6,6 +6,7 @@
 
 int visited[100] = {-1};
 int numVisited = 0;
+bool pathFound = false;
 
 bool isVisited(int _id);
 AdjListNode* getListNode(Graph *graph, int _id);
@@ -13,53 +14,53 @@ void printPath();
 
 int* dfsSearch(Graph *graph, int src, int dest){
 	
-	bool pathFound = false;
-	bool searchOver = false;
 	
+	bool searchOver = false;
 	
 	Stack *stack = getStackPointer();
 	int curId;
-	int j = 0;
-	int *cnbrs;
+	int *nbrIds;
 	
 	AdjListNode *tmpListNode = getListNode(graph, src);
 	Node *tmpNode = tmpListNode->head;
 	
-	while(!pathFound || !searchOver){
-		curId = tmpNode->_id;
-		numVisited++;
-		if(isVisited(curId)){
-			tmpNode = pop(stack);
+	push(stack, tmpNode);
+	
+	while(!pathFound && !searchOver){
+		
+		tmpNode = pop(stack);
+		if(tmpNode==NULL){
+			searchOver = true;
 			continue;
 		}
 		
-		visited[j] = curId;
-		j++;
-		
-		if(curId == dest){
+		visited[numVisited] = tmpNode->_id;
+		numVisited++;
+		if(tmpNode->_id == dest){
 			pathFound = true;
-			printPath();
-			break;
+			continue;
 		}
 		
-		cnbrs = getNeighbours(graph,curId);
+		nbrIds = getNeighbours(graph,tmpNode->_id);
 		while(nbrsCount!=0){
-			AdjListNode *adjNode = getListNode(graph, *cnbrs);
+			AdjListNode *adjNode = getListNode(graph, *nbrIds);
 			Node* nNode = adjNode->head;
 			if(nNode->_id == dest){
-				push(stack,nNode);
-				break;
+				visited[numVisited] = nNode->_id;
+				numVisited++;
+				pathFound = true;
+				break; // break while loop
+			}
+			
+			if(!isVisited(nNode->_id)){
+				push(stack, nNode);
 			} 
-			push(stack, adjNode->head);
-			cnbrs++;
+			
+			nbrIds++;
 			nbrsCount--;	
 		}
 		
-		//tmpNode = getListNode(graph, tmpNode->_id);
-		tmpNode = pop(stack);
-		if(tmpNode == NULL){
-			searchOver = true;
-		}
+		if(pathFound){continue;	} // get out of main loop
 	}
 	
 	return visited;	

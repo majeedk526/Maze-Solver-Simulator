@@ -17,25 +17,13 @@ int main(void){
 	addEdge(graph,9,1);
 	printGraph(graph);
 	
-	//dfsSearch(graph, 0,2);
+	int *ids = dfsSearch(graph, 0,2);
+	int i=0;
+	
+	for(i=0; i< numVisited; i++){
+		printf("%d -> ", ids[i]);
+	}
 	
 	//system("PAUSE");
 	//return EXIT_SUCCESS;	
-}
-
-
-void jCretaeGraph(){
-	graph = createGraph(3);
-}
-
-void jAddEdge(int src, int dest){
-	addEdge(graph,src, dest);
-}
-
-void jDisplayGraph(){
-	printGraph(graph);
-}
-
-int* jDfsSearch(int src, int dest){
-	return dfsSearch(graph, 0,2);	
 }

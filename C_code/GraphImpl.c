@@ -30,13 +30,17 @@ JNIEXPORT jintArray JNICALL Java_dsa_JGraph_jDfsSearch
   (JNIEnv *env, jobject o, jint src, jint dest){
   	int *path =  dfsSearch(graph, src,dest);
   	int i=0;
-  	jint arr[10] = {-1};
-	for(i=0;i<10;i++){
+  	jint arr[20] = {-1};
+	for(i=0;i<numVisited;i++){
 		arr[i] = path[i]; 	
 	} 
   	
-  	jintArray p = (*env)->NewIntArray(env, 10);
-  	(*env)->SetIntArrayRegion(env, p,0,10,arr);
+  	if(!pathFound){
+  		arr[i] = -2; // unsuccessful search
+	  }
+  	
+  	jintArray p = (*env)->NewIntArray(env, 20);
+  	(*env)->SetIntArrayRegion(env, p,0,20,arr);
 
 	  return p;
   }
