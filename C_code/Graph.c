@@ -60,26 +60,32 @@ AdjListNode* newListNode(AdjListNode *prev, int _id){
 
 bool addEdge(Graph *graph, int src, int dest){
 	
-	AdjListNode *tmpListNode = graph->adjListHead;
+	AdjListNode *tmpListNode;
 	Node *tmpNode;
 	
 	int s = graph->size;
 	
-	for(i=0; i<src; i++){
-		tmpListNode = tmpListNode->next;
-	}
+	tmpListNode = getListNode(graph,src);
 	
 	tmpNode = tmpListNode->head;
 	
 	while(tmpNode->dest != NULL){
 		tmpNode = tmpNode->dest;
-		if(tmpNode->_id == dest){
-			printf("path between %d and %d already exists.\n");
-			return false;
-		}
 	}
 	
-	tmpNode->dest = newNode(tmpNode,dest);
+	Node *nNode = newNode(tmpNode,dest);
+	tmpNode->dest = nNode;
+	
+	tmpListNode = getListNode(graph,dest);
+	tmpNode = tmpListNode->head;
+	
+	while(tmpNode->dest != NULL){
+		tmpNode = tmpNode->dest;
+	}
+	
+	nNode = newNode(tmpNode,src);
+	tmpNode->dest = nNode;
+	
 	return true;
 }
 

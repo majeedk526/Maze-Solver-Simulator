@@ -38,11 +38,19 @@ public class Edge {
 	   }
 	   	
 	   if(src.height > dest.height){
-		   p.rect(src.width, dest.height, ht, wd);
+		   p.rect(src.width-5, dest.height, ht, wd);
 	   }else if(src.width > dest.width) {
-		   p.rect(dest.width, src.height, ht, wd);
+		   p.rect(dest.width, src.height-5, ht, wd);
 	   } else{
-		   p.rect(src.width, src.height, ht, wd);
+		   
+		   //if(ht==5){
+			   p.rect(src.width, src.height-5, ht, wd);
+		   //} else{
+			 //  if(ht==5){
+			//	   p.rect(src.width-5, src.height-5, ht, wd);
+			  // }
+		   //}
+		   
 	   }
 	    
 	  }

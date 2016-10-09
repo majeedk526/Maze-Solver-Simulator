@@ -34,6 +34,10 @@ int* dfsSearch(Graph *graph, int src, int dest){
 			continue;
 		}
 		
+		if(isVisited(tmpNode->_id)){
+			continue;
+		}
+		
 		visited[numVisited] = tmpNode->_id;
 		numVisited++;
 		if(tmpNode->_id == dest){
