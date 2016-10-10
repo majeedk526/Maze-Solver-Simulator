@@ -8,7 +8,7 @@ public class Node {
 	PApplet p;
 	private final int XOFFSET = 200;
 	private final int YOFFSET = -40;
-	public int dist = 100;
+	public int dist = 80;
 	int width, height;
 	boolean isSelected = false;
 	

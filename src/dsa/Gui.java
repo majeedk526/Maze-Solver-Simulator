@@ -44,7 +44,6 @@ public class Gui {
 			}
 		}
 	
-		
 		addEdge(0,0,0,1); addEdge(0,0,1,0); addEdge(1,0,1,1);
 		addEdge(1,1,1,2); addEdge(1,2,1,3); addEdge(1,3,2,3);
 		addEdge(2,3,3,3); addEdge(3,3,3,2); addEdge(2,2,3,2);
@@ -64,7 +63,10 @@ public class Gui {
 		addEdge(4,0,4,1); addEdge(4,1,4,2); addEdge(4,2,5,2);
 		addEdge(5,2,5,3); addEdge(5,1,6,1); addEdge(6,1,7,1);
 		addEdge(6,7,5,7); addEdge(6,7,7,7); addEdge(7,7,7,6);
-		//addEdge(6,7,5,7); addEdge(6,7,7,7); addEdge(7,7,7,6);
+		addEdge(7,4,8,4); addEdge(8,4,8,3); addEdge(8,3,9,3);
+		addEdge(9,3,9,2); addEdge(9,2,8,2); addEdge(8,2,7,2);
+		addEdge(8,2,8,1); addEdge(8,1,8,0); addEdge(8,0,7,0);
+		addEdge(7,0,6,0); addEdge(6,0,6,1); addEdge(5,7,4,7);
 		
 		
 		
@@ -170,7 +172,6 @@ public class Gui {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
