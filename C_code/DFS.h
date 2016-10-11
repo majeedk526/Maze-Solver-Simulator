@@ -20,6 +20,7 @@ int* dfsSearch(Graph *graph, int src, int dest){
 	int trackBack[50];
 	int tbVisited = 0;
 	bool isBackTracking = false;
+	bool unvisitedNodeFound = false;
 	
 	Stack *stack = getStackPointer();
 	Stack *tbstack = getStackPointer();
@@ -32,24 +33,34 @@ int* dfsSearch(Graph *graph, int src, int dest){
 	push(stack, tmpNode);
 	
 	while(!pathFound && !searchOver){
-		
+		unvisitedNodeFound = false;
+	  if(!isBackTracking){
+		printf("stack : ");
+		printStack(stack);
 		tmpNode = pop(stack);
+		
 		if(tmpNode==NULL){
 			searchOver = true;
 			continue;
 		} else {
 			//put on back track stack
 			if(!isVisited(tmpNode->_id)){
-				push(tbstack,tmpNode);	
+				push(tbstack,tmpNode);
+				printf("tb : ");	
+				printStack(tbstack);
 			}
 		}
 		
-		if(isVisited(tmpNode->_id)){
+		//if(isVisited(tmpNode->_id)){
+		} else if(isBackTracking){
 			// throw first element of back track stack
 			// pop and add to visited (from tbstack) until unvisited neighbour node is found
-			isBackTracking = true;
+			//isBackTracking = true;
 			pop(tbstack); // throw top node
 			while(isBackTracking){
+				unvisitedNodeFound = false;
+				printf("tbacking : ");
+				printStack(tbstack);
 				Node *node = pop(tbstack);
 				if(node == NULL) {searchOver = true; break;}
 				visited[numVisited] = node->_id;
@@ -78,20 +89,24 @@ int* dfsSearch(Graph *graph, int src, int dest){
 		}
 		
 		nbrIds = getNeighbours(graph,tmpNode->_id);
-		if(nbrsCount==1) {push(stack, tmpNode);}
+		//if(nbrsCount==1) {push(stack, tmpNode);}
 		while(nbrsCount!=0){
 			if(*nbrIds == dest){
 				visited[numVisited] = *nbrIds;
 				numVisited++;
 				pathFound = true;
 				break; // break while loop
-			}
-			if(!isVisited(*nbrIds)){
+			} else if(!isVisited(*nbrIds)){
 				AdjListNode *adjNode = getListNode(graph, *nbrIds);
 				push(stack, adjNode->head);
-			}
+				unvisitedNodeFound = true;
+			} 
 			nbrIds++;
 			nbrsCount--;	
+		}
+		
+		if(!unvisitedNodeFound){
+			isBackTracking = true;
 		}
 		
 		if(pathFound){continue;	} // get out of main loop
