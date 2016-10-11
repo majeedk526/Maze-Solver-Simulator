@@ -48,12 +48,11 @@ public class Gui {
 		addEdge(1,1,1,2); addEdge(1,2,1,3); addEdge(1,3,2,3);
 		addEdge(2,3,3,3); addEdge(3,3,3,2); addEdge(2,2,3,2);
 		addEdge(1,3,1,4); addEdge(1,4,2,4); addEdge(5,4,6,4);
-		addEdge(2,4,2,3); addEdge(2,4,2,5);
+		addEdge(2,4,2,3); addEdge(2,4,2,5); addEdge(7,7,7,8);
 		addEdge(2,4,3,4); addEdge(3,4,4,4); addEdge(4,4,4,3);
 		addEdge(4,4,4,5); addEdge(4,5,4,6); addEdge(4,6,3,6);
 		addEdge(3,6,2,6); addEdge(2,6,1,6); addEdge(1,6,1,7);
 		addEdge(1,7,2,7); addEdge(2,7,2,6); addEdge(4,5,5,5);
-		//addEdge(5,5,6,5); addEdge(6,5,6,4); addEdge(6,4,5,4);
 		addEdge(5,4,4,4); addEdge(5,5,5,6); addEdge(5,6,5,7);//
 		addEdge(5,7,5,8); addEdge(6,4,6,3); addEdge(6,3,6,2);
 		addEdge(6,2,7,2); addEdge(7,2,7,1); addEdge(6,5,7,5);
@@ -67,6 +66,12 @@ public class Gui {
 		addEdge(9,3,9,2); addEdge(9,2,8,2); addEdge(8,2,7,2);
 		addEdge(8,2,8,1); addEdge(8,1,8,0); addEdge(8,0,7,0);
 		addEdge(7,0,6,0); addEdge(6,0,6,1); addEdge(5,7,4,7);
+		addEdge(7,8,7,9); addEdge(7,9,6,9); addEdge(6,9,5,9);
+		addEdge(5,9,4,9); addEdge(4,9,4,8); addEdge(7,6,8,6);
+		addEdge(8,4,8,5); addEdge(8,5,7,5); addEdge(6,5,6,6);
+		addEdge(6,6,6,7); addEdge(8,8,7,8); addEdge(8,8,8,9);
+		addEdge(9,4,9,5); addEdge(9,5,9,6); addEdge(9,6,9,7);
+		addEdge(9,7,9,8); addEdge(9,8,8,8); 
 		
 	}
 	
@@ -168,7 +173,7 @@ public class Gui {
 				if(e != null){
 					e.markVisited();
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(500);
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
