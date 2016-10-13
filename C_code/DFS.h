@@ -62,14 +62,14 @@ int* dfsSearch(Graph *graph, int src, int dest){
 				printf("tbacking : ");
 				printStack(tbstack);
 				Node *node = pop(tbstack);
-				if(node == NULL) {searchOver = true; break;}
+				if(node == NULL) {isBackTracking = false; break;}
 				visited[numVisited] = node->_id;
 				numVisited++;
 				nbrIds = getNeighbours(graph,node->_id);
 				while(nbrsCount!=0){
 					if(!isVisited(*nbrIds)){
-						push(tbstack,node);
-						isBackTracking = false;
+							push(tbstack,node);
+							isBackTracking = false;	
 						break;
 					}
 					nbrIds++;
@@ -97,9 +97,11 @@ int* dfsSearch(Graph *graph, int src, int dest){
 				pathFound = true;
 				break; // break while loop
 			} else if(!isVisited(*nbrIds)){
-				AdjListNode *adjNode = getListNode(graph, *nbrIds);
-				push(stack, adjNode->head);
-				unvisitedNodeFound = true;
+				if(!isInStack(stack, *nbrIds)){
+					AdjListNode *adjNode = getListNode(graph, *nbrIds);
+					push(stack, adjNode->head);
+					unvisitedNodeFound = true;
+				}
 			} 
 			nbrIds++;
 			nbrsCount--;	

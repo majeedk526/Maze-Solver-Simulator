@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "Types.h"
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct StackNodes{
 	struct StackNodes *bottom;
@@ -47,6 +48,17 @@ Node* pop(Stack *stack){
 	free(stackNode);
 	stack->size--;
 	return data;
+}
+
+bool isInStack(Stack *stack, int val){
+	StackNode *snode = stack->stackHead;
+	while(snode != NULL){
+		if(snode->data->_id == val){
+			return true;
+		}
+		snode = snode->bottom;
+	}
+	return false;
 }
 
 void printStack(Stack *stack){
