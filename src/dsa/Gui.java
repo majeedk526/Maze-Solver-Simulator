@@ -108,11 +108,23 @@ public class Gui {
 	}
 	
 	public void mouseClicked(float x, float y){
-		System.out.println("clicked in gui");
 		isClicked = true;
 		this.mousex = x;
 		this.mousey = y;
 		
+	}
+	
+	public void reset(){
+		for(Node n : nodeList){
+			n.reset();
+		}
+		
+		iterator = edgeList.entrySet().iterator();
+		while(iterator.hasNext()){
+			iterator.next().getValue().reset();
+		}
+		src = null;
+		dest = null;
 	}
 	
 	/**

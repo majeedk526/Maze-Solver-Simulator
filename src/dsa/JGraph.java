@@ -43,12 +43,19 @@ public class JGraph extends PApplet{
 		
 		gui.draw();
 		
+		// search
 		stroke(4);
 		fill(0,200,0);
 		ellipse(40,40,50,50);
 		fill(0);
 		text("Search", 20,45);
 		
+		// reset
+		stroke(4);
+		fill(200,200,100);
+		ellipse(40,95,50,50);
+		fill(0);
+		text("Reset", 25,100);
 		
 	}
 	
@@ -56,7 +63,12 @@ public class JGraph extends PApplet{
 		
 		if(mouseX < 70 && mouseX > 10 && mouseY < 70 && mouseY > 10){
 			gui.search();
-		} else {
+		} else if(mouseX < 70 && mouseX > 10 && mouseY < 120 && mouseY > 75 ){
+			gui.reset();
+			//gui = null;
+			//gui = new Gui(this);
+			//gui.setup();
+		}else {
 			gui.mouseClicked(mouseX, mouseY);
 		}
 	}

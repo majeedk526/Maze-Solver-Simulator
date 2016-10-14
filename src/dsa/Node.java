@@ -48,12 +48,17 @@ public class Node {
 	  
 	  public void setSrc(){
 		  isSelected = true;
-		 R=223; G= 220; B=20;
+		  R=20; G= 169; B=243;
 	  }
 	  
 	  public void setDest(){
 		  isSelected = true;
-		  R=20; G= 169; B=243; 
+		   
+		  R=223; G= 220; B=20;
+	  }
+	  
+	  public void reset(){
+		  isSelected = false;
 	  }
 	  
 	  boolean isGotClicked(float x, float y){

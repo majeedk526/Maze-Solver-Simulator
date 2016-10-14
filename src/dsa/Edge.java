@@ -43,14 +43,7 @@ public class Edge {
 	   }else if(src.width > dest.width) {
 		   p.rect(dest.width, src.height-5, ht, wd);
 	   } else{
-		   
-		   //if(ht==5){
-			   p.rect(src.width, src.height-5, ht, wd);
-		   //} else{
-			 //  if(ht==5){
-			//	   p.rect(src.width-5, src.height-5, ht, wd);
-			  // }
-		   //}
+		   p.rect(src.width, src.height-5, ht, wd);
 		   
 	   }
 	    
@@ -60,5 +53,11 @@ public class Edge {
 		  visited = true;
 		  R*=5;
 		  draw();
+	  }
+	  
+	  void reset(){
+		visited = false;
+		R = 10;
+		draw();
 	  }
 }
