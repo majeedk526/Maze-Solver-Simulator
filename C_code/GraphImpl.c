@@ -37,6 +37,8 @@ JNIEXPORT jintArray JNICALL Java_dsa_JGraph_jDfsSearch
   	
   	if(!pathFound){
   		arr[i] = -2; // unsuccessful search
+	  } else {
+	  	arr[i] = -1; //successful search
 	  }
   	
   	jintArray p = (*env)->NewIntArray(env, 200);

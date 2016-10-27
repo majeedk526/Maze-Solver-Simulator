@@ -51,11 +51,7 @@ int* dfsSearch(Graph *graph, int src, int dest){
 			}
 		}
 		
-		//if(isVisited(tmpNode->_id)){
 		} else if(isBackTracking){
-			// throw first element of back track stack
-			// pop and add to visited (from tbstack) until unvisited neighbour node is found
-			//isBackTracking = true;
 			pop(tbstack); // throw top node
 			while(isBackTracking){
 				unvisitedNodeFound = false;
@@ -71,7 +67,9 @@ int* dfsSearch(Graph *graph, int src, int dest){
 					//if(!isInStack(stack,*nbrIds)){
 					if(!isVisited(*nbrIds)){
 						printf("unvisited node found _id = %d\n", *nbrIds);
+							// push node for back tarcking
 							push(tbstack,node);
+							// add current unvisited node in stack (duplicate node)
 							push(stack, getListNode(graph,*nbrIds)->head);
 							isBackTracking = false;	
 						break;

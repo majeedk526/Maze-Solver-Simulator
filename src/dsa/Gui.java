@@ -53,7 +53,7 @@ public class Gui {
 		addEdge(4,4,4,5); addEdge(4,5,4,6); addEdge(4,6,3,6);
 		addEdge(3,6,2,6); addEdge(2,6,1,6); addEdge(1,6,1,7);
 		addEdge(1,7,2,7); addEdge(2,7,2,6); addEdge(4,5,5,5);
-		addEdge(5,4,4,4); addEdge(5,5,5,6); addEdge(5,6,5,7);//
+		addEdge(5,4,4,4); addEdge(5,5,5,6); addEdge(5,6,5,7);
 		addEdge(5,7,5,8); addEdge(6,4,6,3); addEdge(6,3,6,2);
 		addEdge(6,2,7,2); addEdge(7,2,7,1); addEdge(6,5,7,5);
 		addEdge(3,9,3,8); addEdge(3,8,2,8); addEdge(2,8,1,8);
@@ -193,6 +193,11 @@ public class Gui {
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
+				} else if(path[i+1] == -1) {
+					System.out.println("Success : path found");
+					break;
+				} else if(path[i+1] == -2){
+					System.out.println("Path not found.");
 				}
 				System.out.print(path[i] + "-> ");
 		}
