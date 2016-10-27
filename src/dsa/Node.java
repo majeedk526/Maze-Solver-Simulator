@@ -24,13 +24,14 @@ public class Node {
 	  
 	  
 	  public void draw(){
+		  p.strokeWeight(1);
 		  
 		 width = XOFFSET + dist*((y*10+x)/10+1);
 		 height = YOFFSET + dist* (x+1);
 		 
 		 
 		 	if(p.mouseX>=width-10 && p.mouseX<=width+10 && p.mouseY>=height-10 && p.mouseY<=height+10){
-		 		  p.text("x: " + x + " y : " + y, 20,100);
+		 		  p.text("x: " + x + " y : " + y, 20,200);
 				  p.fill(p.color(0,100,0));
 				  p.ellipse(width, height, 50, 50);
 			  }

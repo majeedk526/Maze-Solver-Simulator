@@ -64,11 +64,15 @@ int* dfsSearch(Graph *graph, int src, int dest){
 				Node *node = pop(tbstack);
 				if(node == NULL) {isBackTracking = false; break;}
 				visited[numVisited] = node->_id;
+				printf("examining : %d\n", node->_id);
 				numVisited++;
 				nbrIds = getNeighbours(graph,node->_id);
 				while(nbrsCount!=0){
+					//if(!isInStack(stack,*nbrIds)){
 					if(!isVisited(*nbrIds)){
+						printf("unvisited node found _id = %d\n", *nbrIds);
 							push(tbstack,node);
+							push(stack, getListNode(graph,*nbrIds)->head);
 							isBackTracking = false;	
 						break;
 					}

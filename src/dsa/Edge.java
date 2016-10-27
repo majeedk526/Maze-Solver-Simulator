@@ -23,12 +23,19 @@ public class Edge {
 	  
 	  void draw(){
 		 
-		if(visited){
-			p.fill(p.color(R,150,200));
-		} else {
-			p.fill(p.color(100,0,0));	
-		}
+		p.strokeWeight(5); 
 		  
+		if(visited){
+			p.stroke(p.color(R,150,200));
+			//p.fill(p.color(R,150,200));
+		} else {
+			p.stroke(p.color(100,0,0));
+			//p.fill(p.color(100,0,0));	
+		}
+		
+		p.line(src.width, src.height, dest.width, dest.height);
+		  
+		/**
 	   if(src.x == dest.x){
 		   ht=src.dist;
 		   wd = 5;
@@ -37,7 +44,8 @@ public class Edge {
 		   wd =  src.dist;
 		   ht = 5;
 	   }
-	   	
+	   
+	   
 	   if(src.height > dest.height){
 		   p.rect(src.width-5, dest.height, ht, wd);
 	   }else if(src.width > dest.width) {
@@ -45,7 +53,7 @@ public class Edge {
 	   } else{
 		   p.rect(src.width, src.height-5, ht, wd);
 		   
-	   }
+	   }**/
 	    
 	  }
 	  
