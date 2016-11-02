@@ -8,21 +8,24 @@ public class JGraph extends PApplet{
 	private int refWidth = 150;
 	private int refHeight = 20;
 	
-	JGraph jgraph;
-	Gui gui;
+	JGraph jgraph; // Use to call non-static method of JGraph class
+	Gui gui; // holds object of GUI class to generate maze
 	
+	// Native method declarations, which are implemented in C
 	public native void jCreateGraph(int size);
 	public native void jAddEdge(int src, int dest);
 	public native void jDisplayGraph();
 	public native int[] jDfsSearch(int src, int dest);
 	
+	// load the pre-compiled DLL file
 	static {System.loadLibrary("GraphImpl");}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// apply the processing API 
 		PApplet.main(JGraph.class.getName());
 	}
 	
+	// setup window
 	public void settings(){
 		
 		size(1200, 800);
@@ -38,12 +41,12 @@ public class JGraph extends PApplet{
 		
 	}
 	
-	
+	//  Update graphics continuously
 	public void draw(){
 		
 		gui.draw();
 		
-		// search
+		// Animate search button
 		if(mouseX < 70 && mouseX > 10 && mouseY < 70 && mouseY > 10){
 			stroke(4);
 			fill(0,200,0);
@@ -59,7 +62,7 @@ public class JGraph extends PApplet{
 		}
 		
 		
-		// reset
+		// Animate reset button
 		if(mouseX < 70 && mouseX > 10 && mouseY < 120 && mouseY > 75 ) {
 			stroke(4);
 			fill(200,200,100);
@@ -74,6 +77,7 @@ public class JGraph extends PApplet{
 			text("Reset", 25,100);
 		}
 		
+		// Print text information
 		fill(color(10,150,200));	
 		rect(40,160,50,5);
 		text("Edge visited once.",95,165);
@@ -85,18 +89,17 @@ public class JGraph extends PApplet{
 	
 	public void mouseClicked(){
 		
+		// Search button clicked
 		if(mouseX < 70 && mouseX > 10 && mouseY < 70 && mouseY > 10){
 			gui.search();
+			
+			// Reset button clicked
 		} else if(mouseX < 70 && mouseX > 10 && mouseY < 120 && mouseY > 75 ){
 			gui.reset();
+			
+			// Check if any maze node is clicked
 		}else {
 			gui.mouseClicked(mouseX, mouseY);
 		}
-	}
-	
-	
-	
-	
-	
-		
+	}		
 }

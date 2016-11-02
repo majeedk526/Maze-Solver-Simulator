@@ -7,25 +7,29 @@ import java.util.List;
 import java.util.Map;
 
 import processing.core.PApplet;
-import processing.event.MouseEvent;
 
 public class Gui {
 	
 	PApplet p;
-	JGraph jgraph;
+	JGraph jgraph; // used to get PApplet object
 	
 	Node src = null, dest = null;
 	boolean lastSrcSelected = false;
 	
+	// Holds references to nodes and edges
 	List<Node> nodeList;
 	Map<String, Edge> edgeList;
 	Iterator<Map.Entry<String, Edge>> iterator;
 	
-	int[] path;
+	int[] path; // stores node visited during DFS search
+	
+	// Selecting source and goal node
 	boolean isClicked = false;
 	float mousex, mousey;
 	
+	
 	public Gui(JGraph jgraph){
+	// Initialise member variables
 		this.p = (PApplet) jgraph;
 		this.jgraph = jgraph;
 		
@@ -36,6 +40,7 @@ public class Gui {
 	
 	public void setup(){
 		
+		// Draw graph with 100 nodes
 		jgraph.jCreateGraph(100);
 		
 		for(int i=0;i<10;i++){
@@ -44,6 +49,7 @@ public class Gui {
 			}
 		}
 	
+		// Add edges between nodes
 		addEdge(0,0,0,1); addEdge(0,0,1,0); addEdge(1,0,1,1);
 		addEdge(1,1,1,2); addEdge(1,2,1,3); addEdge(1,3,2,3);
 		addEdge(2,3,3,3); addEdge(3,3,3,2); addEdge(2,2,3,2);
@@ -72,7 +78,6 @@ public class Gui {
 		addEdge(6,6,6,7); addEdge(8,8,7,8); addEdge(8,8,8,9);
 		addEdge(9,4,9,5); addEdge(9,5,9,6); addEdge(9,6,9,7);
 		addEdge(9,7,9,8); addEdge(9,8,8,8);
-		
 		addEdge(1,1,2,0); addEdge(2,0,3,1); addEdge(3,1,4,2);
 		addEdge(8,6,9,5); addEdge(7,4,5,5); addEdge(2,5,0,4);
 		addEdge(0,4,1,3); addEdge(1,3,0,2); addEdge(4,7,3,8);
@@ -80,17 +85,19 @@ public class Gui {
 	}
 	
 	public void draw(){
-		// create node points
-		
+		// update background
 		p.background(255);
 		
+		// iterate through edge list and draw them
 		iterator = edgeList.entrySet().iterator();
 		while(iterator.hasNext()){
 			iterator.next().getValue().draw();
 		}
 		
+		// iterate through node list and draw them
 		for(Node n : nodeList){
 			if(isClicked){
+				// if node got clicked then select as source or destination node
 				if(n.isGotClicked(mousex, mousey)){
 					if(lastSrcSelected){
 						if(dest!=null){ dest.isSelected = false;}
@@ -111,6 +118,7 @@ public class Gui {
 		}		
 	}
 	
+	// update mouse positions whne it got clicked
 	public void mouseClicked(float x, float y){
 		isClicked = true;
 		this.mousex = x;
@@ -118,6 +126,7 @@ public class Gui {
 		
 	}
 	
+	// Reset each node
 	public void reset(){
 		for(Node n : nodeList){
 			n.reset();
@@ -132,11 +141,11 @@ public class Gui {
 	}
 	
 	/**
-	@param s source node
-	@param d destination node
+	@param x1, y1 coordinates of first node
+	@param x2, y2 Coordinates of second node
 	*/
 	void addEdge(int x1, int y1, int x2, int y2){
-		
+		// add Egde to maze
 		int pos1 = x1 + y1*10;
 		int pos2 = x2 + y2*10;
 		Node n1 = nodeList.get(pos1);
@@ -146,6 +155,7 @@ public class Gui {
 		jgraph.jAddEdge(pos1, pos2);
 	}
 	
+	// add node to maze
 	void addNode(int x, int y){
 		Node n = new Node(p,x,y);
 		nodeList.add(n);
@@ -153,23 +163,27 @@ public class Gui {
 	}
 	
 	void search(){
-		
+		// validate inputs
 		if(src == null || dest ==null){
 			System.out.println("null error either src or destination missing");
 			return;
 		}
 		
+		// get node numbers in range 0 to 100
 		int s = src.x + src.y*10;
 		int d = dest.x + dest.y*10; 
 		
 		System.out.println("src : " + s + " dest : " + d);
 		
+		// call native method and get result
 		int[] path = jgraph.jDfsSearch(s,d);
+		// print graph from Native implementation
 		jgraph.jDisplayGraph();
+		// Show animation to user of each node visited during search
 		new AnimThread(path, edgeList).start();
 	}
 	
-	
+	// Thread class for animating visited edges
 	class AnimThread extends Thread {
 		int path[];
 		Map<String, Edge> edgeList;
@@ -203,5 +217,4 @@ public class Gui {
 		}
 	}
   }
-
 }
