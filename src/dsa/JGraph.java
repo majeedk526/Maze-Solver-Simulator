@@ -11,14 +11,6 @@ public class JGraph extends PApplet{
 	JGraph jgraph; // Use to call non-static method of JGraph class
 	Gui gui; // holds object of GUI class to generate maze
 	
-	// Native method declarations, which are implemented in C
-	public native void jCreateGraph(int size);
-	public native void jAddEdge(int src, int dest);
-	public native void jDisplayGraph();
-	public native int[] jDfsSearch(int src, int dest);
-	
-	// load the pre-compiled DLL file
-	static {System.loadLibrary("GraphImpl");}
 	
 	public static void main(String[] args) {
 		// apply the processing API 
