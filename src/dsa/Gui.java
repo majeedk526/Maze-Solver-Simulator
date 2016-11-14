@@ -61,7 +61,6 @@ public class Gui {
 		addEdge(5,1,6,1); addEdge(6,1,6,2); 
 		
 		addEdge(2,5,1,4); addEdge(1,4,0,4);
-		
 		addEdge(1,3,2,2); addEdge(2,2,3,2); addEdge(3, 2, 3, 1);
 		addEdge(3,2,4,3); addEdge(3,4,4,3); addEdge(4,3,5,3);
 		addEdge(5,3,6,3); addEdge(5,3,5,4); addEdge(4,1,4,2);
